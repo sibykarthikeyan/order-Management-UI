@@ -1,0 +1,137 @@
+<div class="card">
+  <div class="card-body">
+    <form [formGroup]="angForm" novalidate>
+      <div class="form-group">
+        <label class="col-md-4">Order Id </label>
+        <input type="number" class="form-control" 
+          formControlName="OrderId" 
+          #OrderId 
+          [readonly]="true"
+          [(ngModel)] = "product.orderId"/>
+      </div>
+      <div class="form-group">
+        <label class="col-md-4">Product Id </label>
+        <input type="number" class="form-control" 
+          formControlName="ProductId" 
+          #ProductId 
+          [(ngModel)] = "product.productId"/>
+      </div>
+      <div *ngIf="angForm.controls['ProductId'].invalid && (angForm.controls['ProductId'].dirty || angForm.controls['ProductId'].touched)" class="alert alert-danger">
+        <div *ngIf="angForm.controls['ProductId'].errors.required">
+          Product Id is required.
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label class="col-md-4">Product Name</label>
+        <input type="text" class="form-control" 
+          formControlName="ProductName" 
+          #ProductName [(ngModel)] = "product.productName"/>
+      </div>
+      <div *ngIf="angForm.controls['ProductName'].invalid && (angForm.controls['ProductName'].dirty || angForm.controls['ProductName'].touched)" class="alert alert-danger">
+        <div *ngIf="angForm.controls['ProductName'].errors.required">
+          Product Name is required.
+        </div>
+      </div>
+      
+      <div class="form-group">
+        <label class="col-md-4">Order Quantity</label>
+        <input type="number" class="form-control" 
+          formControlName="OrderQuantity" 
+          #OrderQuantity
+          [(ngModel)] = "product.orderQuantity"
+        />
+      </div>
+      <div *ngIf="angForm.controls['OrderQuantity'].invalid && (angForm.controls['OrderQuantity'].dirty || angForm.controls['OrderQuantity'].touched)" class="alert alert-danger">
+        <div *ngIf="angForm.controls['OrderQuantity'].errors.required">
+          order Quantity is required.
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="col-md-4">Order Price</label>
+        <input type="number" class="form-control" 
+          formControlName="OrderPrice" 
+          #OrderPrice
+          [(ngModel)] = "product.orderPrice"
+        />
+      </div>
+      <div *ngIf="angForm.controls['OrderPrice'].invalid && (angForm.controls['OrderPrice'].dirty || angForm.controls['OrderPrice'].touched)" class="alert alert-danger">
+        <div *ngIf="angForm.controls['OrderPrice'].errors.required">
+          Order Price is required.
+        </div>
+      </div>
+      <div class="form-group">
+        <button (click) = "updateOrder(OrderId.value,ProductId.value, ProductName.value, OrderQuantity.value, OrderPrice.value)" type="submit" class="btn btn-primary"
+        [disabled]="angForm.invalid" >
+          Update Product
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
+
+
+
+<!-- <div class="card">
+  <div class="card-body">
+    <form [formGroup]="angForm" novalidate>
+      <div class="submit-form">
+          <div *ngIf="!submitted">
+            <div class="form-group">
+              <label for="productId">ProductId</label>
+              <input
+                type="text"
+                class="form-control"
+                id="productId"
+                required
+                [(ngModel)]="order.productId"
+                name="productId"
+              />
+            </div>
+        
+            <div class="form-group">
+              <label for="productName">Product Name</label>
+              <input
+                class="form-control"
+                id="productName"
+                required
+                [(ngModel)]="order.productName"
+                name="productName"
+              />
+            </div>
+        
+            <div class="form-group">
+              <label for="orderQuantity">Order Quantity</label>
+              <input
+                class="form-control"
+                id="orderQuantity"
+                required
+                [(ngModel)]="order.orderQuantity"
+                name="orderQuantity"
+              />
+            </div>
+
+            <div>
+              <label for="orderPrice">Order Price</label>
+              <input
+                  class="form-control"
+                  id="orderPrice"
+                  required
+                  [(ngModel)]="order.orderPrice"
+                  name="orderPrice"
+              />
+            </div>
+
+          <div>
+            <button (click)="saveOrder()" class="btn btn-success">Submit</button>
+          </div>
+        
+          <div *ngIf="submitted">
+            <h4>You submitted successfully!</h4>
+            <button class="btn btn-success" (click)="newOrder()">Create</button>
+          </div>
+        </div>
+        </div>
+      </form>
+    </div>
+  </div> -->
