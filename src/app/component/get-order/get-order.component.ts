@@ -28,6 +28,7 @@ export class GetOrderComponent implements OnInit {
   }
 
   retrieveOrders() {
+    console.log("in retrive all")
     this.orderService.getAll()
       .subscribe(
         res => {

@@ -66,8 +66,7 @@ export class EditOrderComponent implements OnInit {
     this.orderService.update(orderId, updateOrderRequest)
       .subscribe(
         response => {
-          console.log(response);
-          this.router.navigate(['/getorder']);
+          this.router.navigate(['/api/getorder']);
         },
         error => {
           console.log(error);

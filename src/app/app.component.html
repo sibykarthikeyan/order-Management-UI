@@ -1,14 +1,21 @@
 <div>
   <nav class="navbar navbar-expand navbar-dark bg-dark">
-    <a href="/getorder" class="navbar-brand">OrderManagement</a>
+    <a href="/api/getorder" class="navbar-brand">OrderManagement</a>
     <div class="navbar-nav mr-auto">
       <li class="nav-item">
-        <a routerLink="getorder" class="nav-link">Orders</a>
+        <a routerLink="/api/getorder" class="nav-link">Orders</a>
       </li>
       <li class="nav-item">
-        <a routerLink="createorder" class="nav-link">Create</a>
+        <a routerLink="/api/createorder" class="nav-link">Create</a>
       </li>
     </div>
+    <ul class="nav navbar-nav navbar-right">
+      <li *ngIf="!auth.isLoggedIn()"><a routerLink="/api/login" class="nav-link">Sign in</a></li>
+      <li *ngIf="auth.isLoggedIn()">
+        <a routerLink="/api/profile" class="nav-link">{{ auth.getUserDetails()?.name }}</a>
+      </li>
+      <li *ngIf="auth.isLoggedIn()" class="nav-link"><a (click)="auth.logout()">Logout</a></li>
+    </ul>
   </nav>
 
   <div class="container mt-3">

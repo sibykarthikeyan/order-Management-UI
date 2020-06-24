@@ -50,7 +50,7 @@ export class CreateOrderComponent implements OnInit {
       .subscribe(
         response => {
           console.log(response);
-          this.router.navigate(['/getorder']);
+          this.router.navigate(['/api/getorder']);
         },
         error => {
           console.log(error);

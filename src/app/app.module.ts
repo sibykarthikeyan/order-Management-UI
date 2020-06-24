@@ -8,6 +8,9 @@ import { EditOrderComponent } from './component/edit-order/edit-order.component'
 import { FormsModule,ReactiveFormsModule  } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
+import { RegisterComponent } from './component/register/register.component';
+import { LoginComponent } from './component/login/login.component';
+import { ProfileComponent } from './component/profile/profile.component';
 
 @NgModule({
   declarations: [
@@ -15,6 +18,9 @@ import { AppRoutingModule } from './app-routing.module';
     CreateOrderComponent,
     GetOrderComponent,
     EditOrderComponent,
+    RegisterComponent,
+    LoginComponent,
+    ProfileComponent
   ],
   imports: [
     BrowserModule,
