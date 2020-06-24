@@ -14,4 +14,4 @@ deploy:
     provider: heroku
 api_key:
     secure: 39e6ff68-9bb0-4615-909e-1ea1b1203712
-app: Squirrel-order-Management
+app: Squirrel-order-Management-system
