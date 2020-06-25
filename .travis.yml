@@ -11,5 +11,10 @@ install:
 branches:
     only: 
         - master
-script:
-    - ng build --prod
+after_script:
+    - chmod +x publish-pages.sh && ./publish-pages.sh
+deploy:
+    provider: heroku
+    api_key:
+        secure: 39e6ff68-9bb0-4615-909e-1ea1b1203712
+    app: squirrel-order-management
