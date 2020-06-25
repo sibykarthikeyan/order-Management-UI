@@ -12,5 +12,4 @@ branches:
     only: 
         - master
 script:
-    - ng lint
     - ng build --prod
