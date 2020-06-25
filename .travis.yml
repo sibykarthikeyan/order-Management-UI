@@ -11,4 +11,6 @@ install:
 branches:
     only: 
         - master
-app: Squirrel-order-Management-system
+script:
+    - ng lint
+    - ng build --prod
