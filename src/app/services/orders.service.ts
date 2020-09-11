@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { AuthenticationService } from 'src/app/services/authentication.service';
 
-const baseUrl = 'https://squirrel-ordermanagement.herokuapp.com/api/v1/orders';
+const baseUrl = 'http://order-management-git-myproject.apps.awsopenshift.ne-innovation.com/api/v1/orders';
 
 @Injectable({
   providedIn: 'root'

@@ -5,7 +5,7 @@ import { Observable } from "rxjs";
 import { map } from "rxjs/operators";
 
 
-const baseUrl = 'http://localhost:8080/api/v1/orders';
+const baseUrl = 'http://order-management-git-myproject.apps.awsopenshift.ne-innovation.com/api/v1/orders';
 
 export interface UserDetails {
   _id: string;
