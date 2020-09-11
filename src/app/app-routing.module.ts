@@ -11,9 +11,9 @@ import { AuthGuard } from './auth.guard';
 
 const routes: Routes = [
   { path: '', redirectTo: 'orders', pathMatch: 'full',canActivate: [AuthGuard] },
-  { path: 'api/getorder', component: GetOrderComponent, canActivate: [AuthGuard] },
+  { path: 'api/getorder', component: GetOrderComponent },
   { path: 'api/editorder/:id', component: EditOrderComponent },
-  { path: 'api/createorder', component: CreateOrderComponent, canActivate: [AuthGuard] },
+  { path: 'api/createorder', component: CreateOrderComponent },
   { path: "api/login", component: LoginComponent },
   { path: "api/register", component: RegisterComponent },
   { path: "api/profile", component: ProfileComponent, canActivate: [AuthGuard] }
