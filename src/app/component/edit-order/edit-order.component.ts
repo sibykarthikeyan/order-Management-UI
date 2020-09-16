@@ -28,8 +28,8 @@ export class EditOrderComponent implements OnInit {
     this.route.params.subscribe(params => {
       this.orderService.get(params['id'])
         .subscribe(res => {
-          this.product = res[0];
-          console.log(res[0]);
+          this.product = res;
+          console.log(res);
       });
     });
   }

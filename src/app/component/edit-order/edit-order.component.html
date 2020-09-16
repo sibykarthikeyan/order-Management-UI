@@ -7,14 +7,14 @@
           formControlName="OrderId" 
           #OrderId 
           [readonly]="true"
-          [(ngModel)] = "product.orderId"/>
+          [(ngModel)] = "product.data[0].orderId"/>
       </div>
       <div class="form-group">
         <label class="col-md-4">Product Id </label>
         <input type="number" class="form-control" 
           formControlName="ProductId" 
           #ProductId 
-          [(ngModel)] = "product.productId"/>
+          [(ngModel)] = "product.data[0].productId"/>
       </div>
       <div *ngIf="angForm.controls['ProductId'].invalid && (angForm.controls['ProductId'].dirty || angForm.controls['ProductId'].touched)" class="alert alert-danger">
         <div *ngIf="angForm.controls['ProductId'].errors.required">
@@ -26,7 +26,7 @@
         <label class="col-md-4">Product Name</label>
         <input type="text" class="form-control" 
           formControlName="ProductName" 
-          #ProductName [(ngModel)] = "product.productName"/>
+          #ProductName [(ngModel)] = "product.data[0].productName"/>
       </div>
       <div *ngIf="angForm.controls['ProductName'].invalid && (angForm.controls['ProductName'].dirty || angForm.controls['ProductName'].touched)" class="alert alert-danger">
         <div *ngIf="angForm.controls['ProductName'].errors.required">
@@ -39,7 +39,7 @@
         <input type="number" class="form-control" 
           formControlName="OrderQuantity" 
           #OrderQuantity
-          [(ngModel)] = "product.orderQuantity"
+          [(ngModel)] = "product.data[0].orderQuantity"
         />
       </div>
       <div *ngIf="angForm.controls['OrderQuantity'].invalid && (angForm.controls['OrderQuantity'].dirty || angForm.controls['OrderQuantity'].touched)" class="alert alert-danger">
@@ -52,7 +52,7 @@
         <input type="number" class="form-control" 
           formControlName="OrderPrice" 
           #OrderPrice
-          [(ngModel)] = "product.orderPrice"
+          [(ngModel)] = "product.data[0].orderPrice"
         />
       </div>
       <div *ngIf="angForm.controls['OrderPrice'].invalid && (angForm.controls['OrderPrice'].dirty || angForm.controls['OrderPrice'].touched)" class="alert alert-danger">
