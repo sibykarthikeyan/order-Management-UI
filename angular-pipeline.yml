@@ -1,59 +1,99 @@
 kind: "BuildConfig"
 apiVersion: "v1"
 metadata:
-  name: "angular-example-pipeline"
+  name: "angular-sample-pipeline"
 spec:
-  source:
-    git:
-      uri: "https://github.com/sibykarthikeyan/order-Management-UI"
   strategy:
     jenkinsPipelineStrategy:
+      jenkinsfile: |-
+        def templatePath = 'angular-template.yml'
+        def templateName = 'angular-9-example'
+        pipeline {
+            agent {
+              node {
+                label 'nodejs'
+              }
+            }
+            options {
+                timeout(time: 20, unit: 'MINUTES')
+            }
+
+            stages {
+                stage('preamble') {
+                    steps {
+                        script {
+                            openshift.withCluster() {
+                                openshift.withProject() {
+                                    echo "Using project: ${openshift.project()}"
+                                }
+                            }
+                        }
+                    }
+                }
+                stage('cleanup') {
+                    steps {
+                        script {
+                            openshift.withCluster() {
+                                openshift.withProject() {
+                                    openshift.selector("all", [ template : templateName ]).delete()
+                                    if (openshift.selector("secrets", templateName).exists()) {
+                                        openshift.selector("secrets", templateName).delete()
+                                    }
+                                }
+                            }
+                        } 
+                    } 
+                } 
+                stage('create') {
+                    steps {
+                        script {
+                            openshift.withCluster() {
+                                openshift.withProject() {
+                                    openshift.newApp(templatePath)
+                                }
+                            }
+                        } 
+                    } 
+                } 
+                stage('build') {
+                    steps {
+                        script {
+                            openshift.withCluster() {
+                                openshift.withProject() {
+                                    def builds = openshift.selector("bc", templateName).related('builds')
+                                    builds.untilEach(1) {
+                                        return (it.object().status.phase == "Complete")
+                                    }
+                                }
+                            }
+                        } 
+                    } 
+                } 
+                stage('deploy') {
+                    steps {
+                        script {
+                            openshift.withCluster() {
+                                openshift.withProject() {
+                                    def rm = openshift.selector("dc", templateName).rollout()
+                                    openshift.selector("dc", templateName).related('pods').untilEach(1) {
+                                        return (it.object().status.phase == "Running")
+                                    }
+                                }
+                            }
+                        } 
+                    } 
+                } 
+                stage('tag') {
+                    steps {
+                        script {
+                            openshift.withCluster() {
+                                openshift.withProject() {
+                                    openshift.tag("${templateName}:latest", "${templateName}-staging:latest")
+                                }
+                            }
+                        } 
+                    } 
+                } 
+            } 
+        } 
       type: JenkinsPipeline
-      jenkinsfile: pipeline{
-        agent { label 'nodejs8' }
-          stages{
-            stage ('checkout'){
-              steps{
-                checkout scm
-              }
-            }
-            stage ('install modules'){
-              steps{
-                sh '''
-                  npm install --verbose -d 
-                  npm install --save classlist.js
-                '''
-              }
-            }
-            stage ('test'){
-              steps{
-                sh '''
-                  $(npm bin)/ng test --single-run --browsers Chrome_no_sandbox
-                '''
-              }
-              post {
-                  always {
-                    junit "test-results.xml"
-                  }
-              }
-            }
-            stage ('code quality'){
-              steps{
-                sh '$(npm bin)/ng lint'
-              }
-            }
-            stage ('build') {
-              steps{
-                sh '$(npm bin)/ng build --prod --build-optimizer'
-              }
-            }
-            stage ('build image') {
-              steps{
-                sh '''
-                  rm -rf node_modules
-                  oc start-build angular-9-example --from-dir=. --follow
-                '''
-              }
-            }
-          }
-        }    
