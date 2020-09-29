@@ -6,7 +6,7 @@ spec:
   strategy:
     jenkinsPipelineStrategy:
       jenkinsfile: |-
-        def templatePath = 'angular-template.yml'
+        def templatePath = 'https://raw.githubusercontent.com/sibykarthikeyan/order-Management-UI/master/angular-template.yml'
         def templateName = 'angular-9-example'
         pipeline {
             agent {
