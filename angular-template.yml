@@ -43,7 +43,7 @@ parameters:
   - name: OUTPUT_DIR
     description: The location of the compiled static files from your web apps builder
     displayName: Output Directory
-    value: dist/angular-web-app
+    value: dist
     required: false
   - name: GITHUB_WEBHOOK_SECRET
     description: A secret string used to configure the GitHub webhook.
