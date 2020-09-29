@@ -1,9 +1,9 @@
 apiVersion: v1
 kind: Template
 metadata:
-  name: angular-web-app-example
+  name: angular-web-app
   annotations:
-    iconClass: icon-js
+    iconClass: icon-jboss
     tags: nodejs, angular, web app
     template.openshift.io/provider-display-name: "Red Hat, Inc."
     openshift.io/display-name: "Angular Web Application"
